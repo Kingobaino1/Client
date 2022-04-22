@@ -39,3 +39,17 @@
   width: 25px;
   padding-top: 10px;
 }
+
+.img {
+  height: 290px;
+  width: 300px;
+}
+
+.imgs {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+}
+
+.btn {
+  text-decoration: none;
+}

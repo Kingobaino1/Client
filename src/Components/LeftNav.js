@@ -5,7 +5,7 @@ class LeftNav extends Component {
     return (
       <div className='left'>
         <ul className='nav-ul'>
-          <li>{this.props.name}</li>
+          <button onClick={this.props.categorySelector}>{this.props.name} </button>
         </ul>
       </div>
     )

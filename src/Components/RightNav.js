@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 
 class RightNav extends Component {
   render() {
@@ -7,8 +8,22 @@ class RightNav extends Component {
         <ul className='nav-ul'>
           <li>
             <span>
-              <i className="fa-solid fa-dollar-sign"></i>
-              <i className="fa-solid fa-angle-down"></i>
+            <label htmlFor="categories" className="">
+             <div className="">
+               <i className="fa-solid fa-dollar-sign"></i>
+            <select id="filter" onChange={this.props.handleFilterChange}>
+            {this.props.currency.data.currencies.map((item) => (
+            <option
+              key={item.label}
+              value={item.label}
+            >
+              
+                {item.symbol} {item.label}
+            </option>
+          ))}
+        </select>
+      </div>
+    </label>
             </span>
           </li>
           </ul>
@@ -20,4 +35,10 @@ class RightNav extends Component {
   }
 }
 
-export default RightNav;
+const mapStateToProps = (state) => {
+  return {
+   currency: state.currencyReducer,
+  }
+}
+
+export default connect(mapStateToProps)(RightNav);
