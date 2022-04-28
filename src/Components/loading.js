@@ -4,14 +4,14 @@ import{
   category,
   allProduct,
   currency,
+  cartItemsQuery,
  } from '../actions/index';
 
-class Test extends Component {
+class Loading extends Component {
   render() {
-
     return(
-      <div>Hello</div>
-  )
+      <div className='load'><h1 className="loading">Loading...</h1></div>
+    )
   }
 }
 
@@ -20,7 +20,8 @@ const mapDispatchToProps = (dispatch) => {
     categoryReducer: dispatch(category()),
     allProductReducer: dispatch(allProduct()),
     currencyReducer: dispatch(currency()),
+    cartItemsReducer: dispatch(cartItemsQuery()),
   }
 };
 
-export default connect(null, mapDispatchToProps)(Test);
+export default connect(null, mapDispatchToProps)(Loading);

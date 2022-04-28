@@ -52,4 +52,52 @@
 
 .btn {
   text-decoration: none;
+  border: 0;
+};
+
+.pro {
+  /* display: grid; */
+  /* grid-template-columns: 1fr 3fr 2fr;
+  height: 120vh; */
+}
+
+.w-1 {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 3fr 2fr;
+  margin-top: 40px;
+}
+
+.sml-img {
+height: 87.61px;
+width: 176.65px;
+margin: 0 0 30px 50px;
+}
+
+.sml-img-div {
+  display: flex;
+  flex-direction: column;
+  height: 30vh;
+}
+
+.bg-img {
+  width: 600px;
+  height: 600px;
+}
+
+.color {
+  width: 32px;
+  height: 32px;
+}
+
+.color-div {
+  display: flex;
+  flex-direction: row;
+}
+
+.loading {
+  color: blue;
+  width: 25%;
+  margin: 0 auto;
 }

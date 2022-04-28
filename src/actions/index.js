@@ -1,16 +1,26 @@
+import Constants from './constants';
 import
 {
   request,
   allProducts,
   currencies,
-  }  from '../Queries/categories';
+  product,
+  cartQuery,
+  }  from '../Queries/queries';
 
-const CATEGORY = 'CATEGORY';
-const ALLCAT = 'ALLCAT';
-const CURRENCY = 'CURRENCY';
+  const {
+    CATEGORY,
+    ALLCAT,
+    CURRENCY,
+    SHOW,
+    CART,
+    ADD_CART,
+    ID,
+    CART_QUERY
+  } = Constants();
 
 const category = () => async(dispatch) => {
-    const response = await request
+    const response = await request;
     dispatch({
       type: CATEGORY,
       payload: response.data,
@@ -18,23 +28,60 @@ const category = () => async(dispatch) => {
   };
 
 const allProduct = () => async(dispatch) => {
-  const response = await allProducts
+  const response = await allProducts;
   dispatch({
     type: ALLCAT,
-    payload: response.data
-  })
+    payload: response.data,
+  });
 };
 
 const currency = () => async(dispatch) => {
-  const response = await currencies
+  const response = await currencies;
   dispatch({
     type: CURRENCY,
-    payload: response.data
-  })
-}
+    payload: response.data,
+  });
+};
+
+const displayProduct = (id) => async(dispatch) => {
+  const res = await product(id);
+  dispatch({
+    type: SHOW,
+    payload: res,
+    isFetching: false,
+  });
+};
+
+const cart = (item) => ({
+  type: CART,
+  payload: item,
+});
+
+const cartProducts = (product) => ({
+  type: ADD_CART,
+  payload: product,
+});
+
+const itemId = (id) => ({
+  type: ID,
+  payload: id,
+});
+
+const cartItemsQuery = () => async(dispatch) => {
+  const response = await cartQuery;
+  dispatch({
+    type: CART_QUERY,
+    payload: response,
+  });
+};
 
 export{
   category,
   allProduct,
   currency,
-}
+  displayProduct,
+  cart,
+  cartProducts,
+  itemId,
+  cartItemsQuery,
+};

@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 
 class RightNav extends Component {
   render() {
@@ -27,9 +29,11 @@ class RightNav extends Component {
             </span>
           </li>
           </ul>
+          <Link to='cart'>
           <ul className='nav-ul'>
           <li><i className="fa-solid fa-cart-shopping"></i></li>
         </ul>
+        </Link>
       </div>
     )
   }

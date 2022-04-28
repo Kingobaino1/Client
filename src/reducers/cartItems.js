@@ -1,14 +1,14 @@
 const initialState = {
-  data: []
+  data: {},
 };
 
-const currencyReducer = (state = initialState, action) => {
+const cartItemsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'CURRENCY':
+    case 'CART_QUERY':
       return { ...state, data: action.payload };
     default:
       return state;
   };
 };
 
-export default currencyReducer;
+export default cartItemsReducer;
