@@ -33,7 +33,12 @@ class RightNav extends Component {
           <ul className='nav-ul'>
           <li><i className="fa-solid fa-cart-shopping"></i></li>
         </ul>
+        
         </Link>
+        {this.props.carts.length > 0 ?
+          <div className='count'>{this.props.carts.length}</div> : null
+        }
+        
       </div>
     )
   }
@@ -42,6 +47,7 @@ class RightNav extends Component {
 const mapStateToProps = (state) => {
   return {
    currency: state.currencyReducer,
+   carts: state.cartProductsReducer
   }
 }
 

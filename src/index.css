@@ -101,3 +101,17 @@ margin: 0 0 30px 50px;
   width: 25%;
   margin: 0 auto;
 }
+
+.count {
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  position: relative;
+  left: -10px;
+  top: 9px;
+  font-size: small;
+  font-weight: bold;
+}
