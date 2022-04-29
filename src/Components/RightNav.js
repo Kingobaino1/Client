@@ -4,6 +4,16 @@ import { Link } from 'react-router-dom';
 
 
 class RightNav extends Component {
+  constructor(props){
+    super(props);
+    // this.openCart = this.openCart.bind(this);
+  }
+
+  // openCart(){
+  //   return true
+  // }
+
+
   render() {
     return (
       <div className='right'>
@@ -35,8 +45,8 @@ class RightNav extends Component {
         </ul>
         
         </Link>
-        {this.props.carts.length > 0 ?
-          <div className='count'>{this.props.carts.length}</div> : null
+        {this.props.quantity > 0 ?
+          <div className='count'>{this.props.quantity}</div> : null
         }
         
       </div>
@@ -47,7 +57,7 @@ class RightNav extends Component {
 const mapStateToProps = (state) => {
   return {
    currency: state.currencyReducer,
-   carts: state.cartProductsReducer
+   quantity: state.quantityReducer
   }
 }
 

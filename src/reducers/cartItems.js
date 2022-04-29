@@ -1,11 +1,9 @@
-const initialState = {
-  data: {},
-};
+const initialState = [];
 
 const cartItemsReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CART_QUERY':
-      return { ...state, data: action.payload };
+      return [ ...state, action.payload ];
     default:
       return state;
   };

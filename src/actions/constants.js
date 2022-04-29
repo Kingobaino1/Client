@@ -7,6 +7,8 @@ const Constants = () => {
   const ADD_CART = 'ADD_CART';
   const ID = 'ID';
   const CART_QUERY = 'CART_QUERY';
+  const COUNT = 'COUNT';
+
   return {
     CATEGORY,
     ALLCAT,
@@ -16,6 +18,7 @@ const Constants = () => {
     ADD_CART,
     ID,
     CART_QUERY,
+    COUNT,
   };
 };
 

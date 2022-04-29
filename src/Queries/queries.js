@@ -71,30 +71,9 @@ import { client } from './client';
     }`
   });
 
-  const cartQuery = client.query({
-    query: gql`
-      query {
-        categories {
-          products {
-            id
-            name
-            gallery
-            attributes {
-              name
-              items {
-                value
-              }
-            }
-          }  
-        }
-      }
-    `
-  });
-
 export {
   request,
   allProducts,
   currencies,
   product,
-  cartQuery
 };

@@ -1,10 +1,13 @@
 import { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Images extends Component {
   render(){
     return(
       <div>
-        <img src={this.props.src} alt='Products' className="img imgs" />
+        {/* <Link to={this.props.name}> */}
+          <img src={this.props.src} alt='Products' className="img imgs" />
+        {/* </Link> */}
         <div>
           {this.props.name}
         </div>

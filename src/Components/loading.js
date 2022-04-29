@@ -4,7 +4,6 @@ import{
   category,
   allProduct,
   currency,
-  cartItemsQuery,
  } from '../actions/index';
 
 class Loading extends Component {
@@ -20,7 +19,6 @@ const mapDispatchToProps = (dispatch) => {
     categoryReducer: dispatch(category()),
     allProductReducer: dispatch(allProduct()),
     currencyReducer: dispatch(currency()),
-    cartItemsReducer: dispatch(cartItemsQuery()),
   }
 };
 

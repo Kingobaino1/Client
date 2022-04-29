@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { cart, cartProducts, cartItemsQuery } from '../actions/index';
+import { cart, cartProducts, cartItems, quantity } from '../actions/index';
+import categoryLogic from '../logic/categoryLogic';
 
 class Product extends Component {
   constructor(props) {
@@ -11,20 +12,18 @@ class Product extends Component {
     };
   };
 
-  addToCart = (e) => {
+  addToCart(e) {
     e.preventDefault();
     const item = this.props.cartReducer(this.state);
     const product = this.props.productReducer.product;
-    this.props.cartProductsReducer(item.payload);
-    // this.props.cartProductsReducer(product);
-
-    console.log(product)
+    this.props.cartProductsReducer(product);
+    this.props.cartItemsReducer(item.payload);
+    this.props.quantity(1);
   };
 
   render(){
     if(!(this.props.productReducer == null)){
       return(
-        // <div className='pro'>
           <div className='w-1'>
               <div className='sml-img-div'>
                 <img src={this.props.productReducer.product.gallery[1]} alt='Products' className='sml-img' />
@@ -37,20 +36,22 @@ class Product extends Component {
               <div>
                 {
                 this.props.productReducer.product.attributes.length > 0 ?
+                
                   this.props.productReducer.product.attributes.map((attribute) => {
-                    return  <div className='color-di'>
+                    return  <div className='color-di' key={attribute.name}>
                       <h1 key={attribute.name}>{attribute.name}:</h1>
-                      <div className='colo-div'>
-                      {attribute.items.map((att) => {
-                        if(attribute.name === 'Color') {
-                          return <div className='color-di' key={att.value}><button style={{backgroundColor: att.value}} className='color' onClick={() => {
+                      <div className='d-flex'>
+                        {attribute.items.map((att) => {
+                          if(attribute.name === 'Color') {
+                            return <div className='color-di' key={att.value}><button style={{backgroundColor: att.value}} className='color' onClick={() => {
+                              this.setState({[attribute.name]: att.value});
+                            }}></button></div>
+                          }
+                          return <div key={att.value}><button onClick={() => {
                             this.setState({[attribute.name]: att.value});
-                          }}></button></div>
+                          }}>{att.value}</button></div>
+                        })
                         }
-                        return <div><button onClick={() => {
-                          this.setState({[attribute.name]: att.value});
-                        }}>{att.value}</button></div>
-                      })}
                       </div>
                       </div>
                   })
@@ -65,8 +66,6 @@ class Product extends Component {
               <div><button onClick={this.addToCart}>ADD TO CART</button></div>
               <div dangerouslySetInnerHTML={ { __html: this.props.productReducer.product.description } } className='w-3' /></div>
           </div>
-         
-        // </div>
       )
     }
   };
@@ -84,7 +83,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     cartReducer: item => dispatch(cart(item)),
     cartProductsReducer: (product) => dispatch(cartProducts(product)),
-    cartItemsReducer: dispatch(cartItemsQuery()),
+    cartItemsReducer: items => dispatch(cartItems(items)),
+    quantity: count => dispatch(quantity(count)),
 
   };
 };

@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import Loading from './loading';
 import Images from './Images';
 import Product from './Product';
-import { itemId, displayProduct } from '../actions/index';
 import Cart from './Cart';
+import { itemId, displayProduct } from '../actions/index';
 
 
 class App extends Component {
@@ -19,9 +19,11 @@ class App extends Component {
       symbol: '$',
       amount: 0,
       id: '',
+      cart: false,
     };
     this.handleFilterChange = this.handleFilterChange.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.openCart = this.openCart.bind(this);
   }
 
   handleFilterChange(e){
@@ -42,6 +44,12 @@ class App extends Component {
     console.log('this is cart')
   }
 
+  openCart(){
+    this.setState({
+      cart: true,
+    })
+  }
+
   render() {
     this.cat = this.props.category.data;
     this.state1 = this.props.allProducts.data.categories;
@@ -54,8 +62,7 @@ class App extends Component {
               id: ''})}} />
             })} 
             <MiddleNav />
-            <RightNav handleFilterChange={this.handleFilterChange} />   
-            {/* <Cart />    */}
+            <RightNav handleFilterChange={this.handleFilterChange} openCart={this.openCart} />   
           </div>
           { (this.state.id.length === 0) ? 
               <div className='imgs'>
@@ -76,7 +83,6 @@ class App extends Component {
                               this.props.productReducer(products.id)
                               this.props.currentItemId({id: products.id});
                               }} key={products.name}>
-                                
                                 <Images src={products.gallery[0]} name={products.name}
                                         amount={label[i].amount} symbol={label[i].currency.symbol}
                                         key={products.name}
@@ -92,7 +98,7 @@ class App extends Component {
               </div> :
               <>
               <Product sign={this.state.symbol} amount={this.state.amount} />
-              
+              <Cart />
               </>
           }
         </div>

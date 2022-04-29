@@ -5,7 +5,6 @@ import
   allProducts,
   currencies,
   product,
-  cartQuery,
   }  from '../Queries/queries';
 
   const {
@@ -16,7 +15,8 @@ import
     CART,
     ADD_CART,
     ID,
-    CART_QUERY
+    CART_QUERY,
+    COUNT,
   } = Constants();
 
 const category = () => async(dispatch) => {
@@ -67,13 +67,15 @@ const itemId = (id) => ({
   payload: id,
 });
 
-const cartItemsQuery = () => async(dispatch) => {
-  const response = await cartQuery;
-  dispatch({
+const cartItems = (items) =>({
     type: CART_QUERY,
-    payload: response,
+    payload: items,
   });
-};
+
+const quantity = (count) => ({
+  type: COUNT,
+  payload: count 
+});
 
 export{
   category,
@@ -83,5 +85,6 @@ export{
   cart,
   cartProducts,
   itemId,
-  cartItemsQuery,
+  cartItems,
+  quantity,
 };

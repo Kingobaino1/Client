@@ -1,3 +1,8 @@
+.d-flex {
+  display: flex;
+  flex-direction: row;
+}
+
 .nav {
   display: flex;
   flex-direction: row;
@@ -114,4 +119,56 @@ margin: 0 0 30px 50px;
   top: 9px;
   font-size: small;
   font-weight: bold;
+}
+
+.space {
+  justify-content: space-between;
+}
+
+.w {
+  width: 100%;
+}
+
+.d-grid {
+  display: grid;
+  grid-template-columns: 50%;
+}
+
+.plus {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #1D1F22;
+}
+
+.p {
+  position: relative;
+  top: -20px;
+  right: -10px;
+}
+
+.bg {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.fa-angle-left,
+.fa-angle-right {
+  background-color: #1D1F22;
+  color: white;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  padding: 1px 1px;
+}
+
+.fa-angle-left {
+  margin-left: 5px;
 }
