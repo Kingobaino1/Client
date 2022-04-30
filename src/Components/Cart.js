@@ -6,6 +6,7 @@ class Cart extends Component {
     super(props);
     this.state = {
       i: 0,
+      total: 0
     };
     this.nextImg = this.nextImg.bind(this);
     this.prevImg = this.prevImg.bind(this);
@@ -33,10 +34,11 @@ class Cart extends Component {
            <div className='w'>           
            {
              this.props.cart.map((item) => {
+               const url = `url(${item.gallery[this.state.i]})`
                return <div className='d-flex space w' key={item.name}>
                  <div className=''>
                     <h6>{item.name}</h6>
-                      <h6>{this.props.symbol}{this.props.amount}</h6>
+                    <h6>{this.props.symbol}{this.props.amount}</h6>
                    {item.attributes.map((attribute) =>{
                       return (<div>
                         <h1 key={attribute.name}>{attribute.name}:</h1>
@@ -64,13 +66,14 @@ class Cart extends Component {
                        <div onClick={this.decrement} className='plus'><h1 className='p'>-</h1></div>
                      </div>
                      <div> 
-                       <div style={{backgroundImage: `url(${item.gallery[this.state.i]})`,
+                       
+                       <div style={{backgroundImage: url,
                                      backgroundPosition: 'center center'}} className='bg'>
                           <div className=''>
                                  <i className="fa-solid fa-angle-left" onClick={this.prevImg}></i>
                                  <i className="fa-solid fa-angle-right" onClick={this.nextImg}></i>
                           </div>
-                        </div>  
+                        </div> 
                      </div>
                      <div>3</div>
                    </div>
@@ -79,7 +82,11 @@ class Cart extends Component {
 
            }
            </div>
-           <div>2</div>
+           <div>
+            <h4>Tax:</h4>
+            <h4>Qty:</h4>
+            <h4>Total:</h4>
+           </div>
          </div>
     )
       }

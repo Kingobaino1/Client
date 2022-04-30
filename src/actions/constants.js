@@ -8,7 +8,8 @@ const Constants = () => {
   const ID = 'ID';
   const CART_QUERY = 'CART_QUERY';
   const COUNT = 'COUNT';
-
+  const CHANGE_CURRENCY = 'CHANGE_CURRENCY';
+  const CURRENT_CATEGORY = 'CURRENT_CATEGORY';
   return {
     CATEGORY,
     ALLCAT,
@@ -19,6 +20,8 @@ const Constants = () => {
     ID,
     CART_QUERY,
     COUNT,
+    CHANGE_CURRENCY,
+    CURRENT_CATEGORY,
   };
 };
 

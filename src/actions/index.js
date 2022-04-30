@@ -17,6 +17,8 @@ import
     ID,
     CART_QUERY,
     COUNT,
+    CHANGE_CURRENCY,
+    CURRENT_CATEGORY,
   } = Constants();
 
 const category = () => async(dispatch) => {
@@ -74,7 +76,17 @@ const cartItems = (items) =>({
 
 const quantity = (count) => ({
   type: COUNT,
-  payload: count 
+  payload: count,
+});
+
+const changeCurrency = (label) => ({
+  type: CHANGE_CURRENCY,
+  payload: label,
+});
+
+const currentCategory = (category) => ({
+  type: CURRENT_CATEGORY,
+  payload: category,
 });
 
 export{
@@ -87,4 +99,6 @@ export{
   itemId,
   cartItems,
   quantity,
+  changeCurrency,
+  currentCategory,
 };

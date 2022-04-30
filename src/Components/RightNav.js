@@ -1,18 +1,19 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import { changeCurrency, ChangeCurrency } from '../actions/index';
 import { Link } from 'react-router-dom';
 
 
 class RightNav extends Component {
   constructor(props){
     super(props);
-    // this.openCart = this.openCart.bind(this);
+    this.selectCurrency = this.selectCurrency.bind(this);
   }
 
-  // openCart(){
-  //   return true
-  // }
-
+  selectCurrency(e) {
+    const currency = e.target.value;
+    this.props.label(currency);
+  }
 
   render() {
     return (
@@ -23,7 +24,7 @@ class RightNav extends Component {
             <label htmlFor="categories" className="">
              <div className="">
                <i className="fa-solid fa-dollar-sign"></i>
-            <select id="filter" onChange={this.props.handleFilterChange}>
+            <select id="filter" onClick={this.selectCurrency}>
             {this.props.currency.data.currencies.map((item) => (
             <option
               key={item.label}
@@ -57,8 +58,14 @@ class RightNav extends Component {
 const mapStateToProps = (state) => {
   return {
    currency: state.currencyReducer,
-   quantity: state.quantityReducer
+   quantity: state.quantityReducer,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    label: item => dispatch(changeCurrency(item))
   }
 }
 
-export default connect(mapStateToProps)(RightNav);
+export default connect(mapStateToProps, mapDispatchToProps)(RightNav);

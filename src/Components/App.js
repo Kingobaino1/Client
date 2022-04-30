@@ -21,58 +21,31 @@ class App extends Component {
       id: '',
       cart: false,
     };
-    this.handleFilterChange = this.handleFilterChange.bind(this);
-    this.addToCart = this.addToCart.bind(this);
-    this.openCart = this.openCart.bind(this);
-  }
-
-  handleFilterChange(e){
-    const currency = e.target.value;
-    this.setState({
-      currency: currency,
-    })
-  };
-
-  currencyFilter(symbol, amount) {
-    this.setState({
-      symbol: symbol,
-      amount: amount,
-    })
-  };
-
-  addToCart(){
-    console.log('this is cart')
-  }
-
-  openCart(){
-    this.setState({
-      cart: true,
-    })
   }
 
   render() {
     this.cat = this.props.category.data;
     this.state1 = this.props.allProducts.data.categories;
     if (this.cat && this.state1) {
+      console.log(this.state1)
       return (
         <div>
           <div className='nav'>
              {this.cat.categories.map((item) => {
-              return <LeftNav name={item.name.toUpperCase()} key={item.name} categorySelector={() => {this.setState({category: item.name,
-              id: ''})}} />
+              return <LeftNav name={item.name} key={item.name} />
             })} 
             <MiddleNav />
-            <RightNav handleFilterChange={this.handleFilterChange} openCart={this.openCart} />   
+            <RightNav />   
           </div>
           { (this.state.id.length === 0) ? 
               <div className='imgs'>
                 { 
                   this.state1.map((item) => {
-                    if(item.name === this.state.category) {
+                    if(item.name === this.props.cate.category) {
                       return item.products.map((products) => {
                         let label = products.prices;
                         for(let i = 0; i < label.length; i++) {
-                          if(label[i].currency.label === this.state.currency) {
+                          if(label[i].currency.label === this.props.currency) {
                           return (
                             <div onClick={() => {
                               this.setState({
@@ -115,8 +88,10 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     category: state.categoryReducer,
+    cate:state.currentCategoryReducer.category,
     allProducts: state.allProductReducer,
     productPage: state.productReducer.data.data,
+    currency: state.currencyReducer.label
   };
 };
 
