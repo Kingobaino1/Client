@@ -1,20 +1,20 @@
 import { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 class Images extends Component {
   render(){
     return(
-      <div>
-        {/* <Link to={this.props.name}> */}
+      <div onClick={() => this.props.goToProductPage(this.props.id) }>
+        <div>
           <img src={this.props.src} alt='Products' className="img imgs" />
-        {/* </Link> */}
         <div>
           {this.props.name}
         </div>
         <div><span>{this.props.symbol}</span><span>{this.props.amount}</span></div>
       </div>
+      </div>
+      
     );
   };
 };
 
-export default Images;
+export default (Images);

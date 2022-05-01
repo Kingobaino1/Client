@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { cart, cartProducts, cartItems, quantity } from '../actions/index';
-import categoryLogic from '../logic/categoryLogic';
 
 class Product extends Component {
   constructor(props) {
@@ -44,11 +43,9 @@ class Product extends Component {
                         {attribute.items.map((att) => {
                           if(attribute.name === 'Color') {
                             return <div className='color-di' key={att.value}><button style={{backgroundColor: att.value}} className='color' onClick={() => {
-                              this.setState({[attribute.name]: att.value});
                             }}></button></div>
                           }
                           return <div key={att.value}><button onClick={() => {
-                            this.setState({[attribute.name]: att.value});
                           }}>{att.value}</button></div>
                         })
                         }
@@ -59,8 +56,11 @@ class Product extends Component {
                 }
                 <div>
                   <h6>Price:</h6>
-                    <div><span>{this.props.sign}</span><span>{this.props.amount}</span></div>
-                 
+                    {this.props.productReducer.product.prices.map((price) => {
+                      if(price.currency.label === this.props.currency){
+                        return <div key={price.amount}><span>{price.currency.symbol}</span><span>{price.amount}</span></div>
+                      }
+                    })}
                 </div>
               </div>
               <div><button onClick={this.addToCart}>ADD TO CART</button></div>
@@ -76,6 +76,7 @@ const mapStateToProps = (state) => {
     productReducer: state.productReducer.data.data,
     cartProducts: state.cartProductsReducer,
     itemId: state.itemIdReducer.id,
+    currency: state.currencyReducer.label,
   };
 };
 

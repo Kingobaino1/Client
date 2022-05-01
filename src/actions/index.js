@@ -26,6 +26,7 @@ const category = () => async(dispatch) => {
     dispatch({
       type: CATEGORY,
       payload: response.data,
+      isFetching: false,
     });
   };
 
@@ -34,6 +35,7 @@ const allProduct = () => async(dispatch) => {
   dispatch({
     type: ALLCAT,
     payload: response.data,
+    loading: false,
   });
 };
 

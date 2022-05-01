@@ -7,12 +7,13 @@ import{
  } from '../actions/index';
 
 class Loading extends Component {
+
   render() {
     return(
       <div className='load'><h1 className="loading">Loading...</h1></div>
-    )
-  }
-}
+    );
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {

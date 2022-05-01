@@ -46,11 +46,9 @@ class Cart extends Component {
                         {attribute.items.map((att) => {
                           if(attribute.name === 'Color') {
                             return <div className='color-di' key={att.value}><button style={{backgroundColor: att.value}} className='color' onClick={() => {
-                              this.setState({[attribute.name]: att.value});
                             }}></button></div>
                           }
                           return <div key={att.value}><button onClick={() => {
-                            this.setState({[attribute.name]: att.value});
                           }}>{att.value}</button></div>
                         })
                         }

@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { changeCurrency, ChangeCurrency } from '../actions/index';
+import { changeCurrency, currentCategory } from '../actions/index';
 import { Link } from 'react-router-dom';
 
 
@@ -8,15 +8,23 @@ class RightNav extends Component {
   constructor(props){
     super(props);
     this.selectCurrency = this.selectCurrency.bind(this);
+    this.goToCart = this.goToCart.bind(this);
   }
 
   selectCurrency(e) {
+    e.preventDefault();
     const currency = e.target.value;
     this.props.label(currency);
+  };
+
+  goToCart(){
+    this.props.category({category: 'cart'});
+    console.log('cart')
   }
 
   render() {
-    return (
+    if(this.props.currency.data.currencies){
+      return (
       <div className='right'>
         <ul className='nav-ul'>
           <li>
@@ -24,7 +32,7 @@ class RightNav extends Component {
             <label htmlFor="categories" className="">
              <div className="">
                <i className="fa-solid fa-dollar-sign"></i>
-            <select id="filter" onClick={this.selectCurrency}>
+            <select id="filter" onChange={this.selectCurrency}>
             {this.props.currency.data.currencies.map((item) => (
             <option
               key={item.label}
@@ -40,18 +48,17 @@ class RightNav extends Component {
             </span>
           </li>
           </ul>
-          <Link to='cart'>
-          <ul className='nav-ul'>
+          <ul className='nav-ul' onClick={this.goToCart}>
           <li><i className="fa-solid fa-cart-shopping"></i></li>
         </ul>
-        
-        </Link>
-        {this.props.quantity > 0 ?
+          {this.props.quantity > 0 ?
           <div className='count'>{this.props.quantity}</div> : null
         }
         
       </div>
     )
+    }
+    
   }
 }
 
@@ -64,7 +71,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    label: item => dispatch(changeCurrency(item))
+    label: item => dispatch(changeCurrency(item)),
+    category: item => dispatch(currentCategory(item)),
   }
 }
 
