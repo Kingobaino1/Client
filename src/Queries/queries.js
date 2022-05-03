@@ -17,6 +17,7 @@ import { client } from './client';
       categories {
         name
         products {
+          inStock
           category
           name
           id

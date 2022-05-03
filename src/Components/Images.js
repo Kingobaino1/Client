@@ -1,19 +1,26 @@
 import { Component } from 'react';
+import Items from './Items';
 
 class Images extends Component {
   render(){
-    return(
-      <div onClick={() => this.props.goToProductPage(this.props.id) }>
-        <div>
-          <img src={this.props.src} alt='Products' className="img imgs" />
-        <div>
-          {this.props.name}
+    if(this.props.stock){
+      return(
+        <div onClick={() => this.props.goToProductPage(this.props.id)}>
+          <Items src={this.props.src} name={this.props.name}
+               symbol={this.props.symbol} amount={this.props.amount}
+               stock=''
+          />
         </div>
-        <div><span>{this.props.symbol}</span><span>{this.props.amount}</span></div>
-      </div>
-      </div>
-      
-    );
+      );
+    };
+      return (
+        <div>
+          <Items src={this.props.src} name={this.props.name}
+            symbol={this.props.symbol} amount={this.props.amount}
+            stock='This product is out of Stock right now'
+          /> 
+        </div>
+      );
   };
 };
 

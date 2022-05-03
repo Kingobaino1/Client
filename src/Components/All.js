@@ -22,6 +22,7 @@ class All extends Component {
       <div className='imgs'>
         {
           (this.allCategory.map((item) => {
+            
            return (item.name === this.props.new) ?
                item.products.map((product) => {
                   const label = product.prices;
@@ -29,7 +30,7 @@ class All extends Component {
                     if(label[i].currency.label === this.props.currency){
                       return <Images src={product.gallery[0]} name={product.name}
                                      amount={label[i].amount} symbol={label[i].currency.symbol}
-                                     key={product.name}
+                                     key={product.name} stock={product.inStock}
                                      goToProductPage={() => {this.goToProductPage(product.id)}}
                              />
                     }

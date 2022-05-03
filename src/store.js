@@ -11,6 +11,7 @@ import itemIdReducer from './reducers/itemId';
 import cartItemsReducer from './reducers/cartItems';
 import quantityReducer from './reducers/quantity';
 import currentCategoryReducer from './reducers/currentCategory';
+import adjustQtyReducer from './reducers/adjustQty';
 
 const middleWares = [thunk, logger]
 const reducers = combineReducers({
@@ -24,6 +25,7 @@ const reducers = combineReducers({
   cartItemsReducer,
   quantityReducer,
   currentCategoryReducer,
+  adjustQtyReducer,
 });
 
 const store = createStore(reducers, applyMiddleware(...middleWares));

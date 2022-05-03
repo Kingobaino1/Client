@@ -1,4 +1,4 @@
-import Constants from './constants';
+import * as actionTypes from './constants';
 import
 {
   request,
@@ -7,24 +7,10 @@ import
   product,
   }  from '../Queries/queries';
 
-  const {
-    CATEGORY,
-    ALLCAT,
-    CURRENCY,
-    SHOW,
-    CART,
-    ADD_CART,
-    ID,
-    CART_QUERY,
-    COUNT,
-    CHANGE_CURRENCY,
-    CURRENT_CATEGORY,
-  } = Constants();
-
 const category = () => async(dispatch) => {
     const response = await request;
     dispatch({
-      type: CATEGORY,
+      type: actionTypes.CATEGORY,
       payload: response.data,
       isFetching: false,
     });
@@ -33,7 +19,7 @@ const category = () => async(dispatch) => {
 const allProduct = () => async(dispatch) => {
   const response = await allProducts;
   dispatch({
-    type: ALLCAT,
+    type: actionTypes.ALLCAT,
     payload: response.data,
     loading: false,
   });
@@ -42,7 +28,7 @@ const allProduct = () => async(dispatch) => {
 const currency = () => async(dispatch) => {
   const response = await currencies;
   dispatch({
-    type: CURRENCY,
+    type: actionTypes.CURRENCY,
     payload: response.data,
   });
 };
@@ -50,45 +36,58 @@ const currency = () => async(dispatch) => {
 const displayProduct = (id) => async(dispatch) => {
   const res = await product(id);
   dispatch({
-    type: SHOW,
+    type: actionTypes.SHOW,
     payload: res,
     isFetching: false,
   });
 };
 
 const cart = (item) => ({
-  type: CART,
+  type: actionTypes.CART,
   payload: item,
 });
 
 const cartProducts = (product) => ({
-  type: ADD_CART,
+  type: actionTypes.ADD_CART,
   payload: product,
 });
 
 const itemId = (id) => ({
-  type: ID,
+  type: actionTypes.ID,
   payload: id,
 });
 
-const cartItems = (items) =>({
-    type: CART_QUERY,
-    payload: items,
+const cartItems = (item) =>({
+    type: actionTypes.CART_QUERY,
+    payload: item
   });
 
 const quantity = (count) => ({
-  type: COUNT,
+  type: actionTypes.COUNT,
   payload: count,
 });
 
 const changeCurrency = (label) => ({
-  type: CHANGE_CURRENCY,
+  type: actionTypes.CHANGE_CURRENCY,
   payload: label,
 });
 
 const currentCategory = (category) => ({
-  type: CURRENT_CATEGORY,
+  type: actionTypes.CURRENT_CATEGORY,
   payload: category,
+});
+
+const adjustQtyUp = (id, value) => ({
+  type: actionTypes.QTY_UP,
+  payload: {
+    id: id, 
+    qty: value,
+  }
+});
+
+const adjustQtyDown = (num) => ({
+  type: actionTypes.QTY_DOWN,
+  payload: num,
 });
 
 export{
@@ -103,4 +102,6 @@ export{
   quantity,
   changeCurrency,
   currentCategory,
+  adjustQtyDown,
+  adjustQtyUp,
 };

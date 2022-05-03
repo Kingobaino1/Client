@@ -1,28 +1,13 @@
-const Constants = () => {
-  const CATEGORY = 'CATEGORY';
-  const ALLCAT = 'ALLCAT';
-  const CURRENCY = 'CURRENCY';
-  const SHOW = 'SHOW';
-  const CART = 'CART';
-  const ADD_CART = 'ADD_CART';
-  const ID = 'ID';
-  const CART_QUERY = 'CART_QUERY';
-  const COUNT = 'COUNT';
-  const CHANGE_CURRENCY = 'CHANGE_CURRENCY';
-  const CURRENT_CATEGORY = 'CURRENT_CATEGORY';
-  return {
-    CATEGORY,
-    ALLCAT,
-    CURRENCY,
-    SHOW,
-    CART,
-    ADD_CART,
-    ID,
-    CART_QUERY,
-    COUNT,
-    CHANGE_CURRENCY,
-    CURRENT_CATEGORY,
-  };
-};
-
-export default Constants;
+  export const CATEGORY = 'CATEGORY';
+  export const ALLCAT = 'ALLCAT';
+  export const CURRENCY = 'CURRENCY';
+  export const SHOW = 'SHOW';
+  export const CART = 'CART';
+  export const ADD_CART = 'ADD_CART';
+  export const ID = 'ID';
+  export const CART_QUERY = 'CART_QUERY';
+  export const COUNT = 'COUNT';
+  export const CHANGE_CURRENCY = 'CHANGE_CURRENCY';
+  export const CURRENT_CATEGORY = 'CURRENT_CATEGORY';
+  export const QTY_DOWN = 'QTY_DOWN';
+  export const QTY_UP = 'QTY_UP';

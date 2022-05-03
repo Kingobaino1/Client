@@ -1,23 +1,28 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { cart, cartProducts, cartItems, quantity } from '../actions/index';
+import { cart, cartProducts, cartItems, quantity, adjustQtyUp } from '../actions/index';
 
 class Product extends Component {
   constructor(props) {
     super(props);
     this.addToCart = this.addToCart.bind(this);
     this.state = {
-      id: this.props.itemId.id,
+        id: this.props.itemId.id,
+        qty: 0,
     };
   };
 
   addToCart(e) {
     e.preventDefault();
-    const item = this.props.cartReducer(this.state);
-    const product = this.props.productReducer.product;
-    this.props.cartProductsReducer(product);
-    this.props.cartItemsReducer(item.payload);
     this.props.quantity(1);
+    const product = this.props.productReducer.product;
+    const item = this.props.cartReducer(this.state);
+    this.props.cartProductsReducer(product);
+    const gall = this.props.productReducer
+    this.setState({
+      qty: this.state.qty + 1
+    })
+    this.props.qty(item.payload);
   };
 
   render(){
@@ -63,7 +68,11 @@ class Product extends Component {
                     })}
                 </div>
               </div>
-              <div><button onClick={this.addToCart}>ADD TO CART</button></div>
+              <div>
+                <button onClick={this.addToCart}>
+                  ADD TO CART
+                </button>
+              </div>
               <div dangerouslySetInnerHTML={ { __html: this.props.productReducer.product.description } } className='w-3' /></div>
           </div>
       )
@@ -74,7 +83,6 @@ class Product extends Component {
 const mapStateToProps = (state) => {
   return {
     productReducer: state.productReducer.data.data,
-    cartProducts: state.cartProductsReducer,
     itemId: state.itemIdReducer.id,
     currency: state.currencyReducer.label,
   };
@@ -84,9 +92,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     cartReducer: item => dispatch(cart(item)),
     cartProductsReducer: (product) => dispatch(cartProducts(product)),
-    cartItemsReducer: items => dispatch(cartItems(items)),
+    qty: items => dispatch(cartItems(items)),
     quantity: count => dispatch(quantity(count)),
-
   };
 };
 

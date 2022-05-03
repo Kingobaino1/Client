@@ -1,40 +1,25 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import ChangeImage from './ChangeImage';
 
 class Cart extends Component {
   constructor(props){
     super(props);
     this.state = {
-      i: 0,
       total: 0
     };
-    this.nextImg = this.nextImg.bind(this);
-    this.prevImg = this.prevImg.bind(this);
   };
-  nextImg(){
-    this.setState({
-      i: this.state.i + 1,
-    });
-  };
-
-  prevImg() {
-    if(this.state.i > 0){
-    this.setState({
-      i: this.state.i - 1,
-    })
-    }
-  }
-
+ 
   render () {
-    
     {
-      if(this.props.cart.length > 0){
-         return(
+      if(this.props.cart.length > 0) {
+        return (
          <div>
            <div className='w'>           
            {
              this.props.cart.map((item) => {
-               const url = `url(${item.gallery[this.state.i]})`
+               const qt = this.props.quantity.filter((a) => a.id === item.id)
+               const length = item.gallery.length;
                return <div className='d-flex space w' key={item.name}>
                  <div className=''>
                     <h6>{item.name}</h6>
@@ -57,32 +42,17 @@ class Cart extends Component {
                       )
                    })}
                    </div> 
+                
                    <div className='d-flex'>
-                     <div className='flex'>
-                       <div onClick={this.increment} className='plus'><h1 className='p'>+</h1></div>
-                       <div><h6 className=''>3</h6></div>
-                       <div onClick={this.decrement} className='plus'><h1 className='p'>-</h1></div>
-                     </div>
-                     <div> 
-                       
-                       <div style={{backgroundImage: url,
-                                     backgroundPosition: 'center center'}} className='bg'>
-                          <div className=''>
-                                 <i className="fa-solid fa-angle-left" onClick={this.prevImg}></i>
-                                 <i className="fa-solid fa-angle-right" onClick={this.nextImg}></i>
-                          </div>
-                        </div> 
-                     </div>
-                     <div>3</div>
+                     <div className='d-flex'><ChangeImage id={qt[0].id} init={qt[0].qty} length={length} num={length - 1} /></div>
                    </div>
                </div>
              })
-
            }
            </div>
            <div>
             <h4>Tax:</h4>
-            <h4>Qty:</h4>
+            <h4>Qty: {this.props.qty}</h4>
             <h4>Total:</h4>
            </div>
          </div>
@@ -101,6 +71,8 @@ const mapStateToProps = (state) => {
     cart: state.cartProductsReducer,
     cartItems: state.cartItemsReducer,
     qty: state.quantityReducer,
+    quantity: state.cartItemsReducer
+
   };
 };
 

@@ -1,5 +1,6 @@
 const initialState = {
-  id: ''
+  id: '',
+  count: 0
 };
 
 const itemIdReducer = (state = initialState, action) => {

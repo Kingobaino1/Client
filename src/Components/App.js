@@ -19,7 +19,7 @@ class App extends Component {
       return (
         <div>
           <div className='nav'>
-            <LeftNav />
+            <LeftNav color='green' />
             <MiddleNav />
             <RightNav />   
           </div>

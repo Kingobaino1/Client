@@ -13,10 +13,10 @@ const Path = () => (
   <>
     <BrowserRouter>
       <Routes>
-        {/* <Route exact path="/" element={<Navigate replace to="/home" />}>
-        </Route> */}
-        <Route exact path="/" element={<App />} />
-        <Route exact path="/cart" element={<Cart />} />
+        <Route exact path="/" element={<Navigate replace to="/home" />}>
+        </Route>
+        <Route exact path="/home" element={<App />} />
+        <Route exact path="/home/cart" element={<Cart />} />
         <Route exact path='/:products' element={<Product />} />
 
       </Routes>

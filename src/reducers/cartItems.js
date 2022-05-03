@@ -1,9 +1,15 @@
-const initialState = [];
+const initialState = []
 
 const cartItemsReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'CART_QUERY':
-      return [ ...state, action.payload ];
+      const inCart = state.filter((item) => item.id === action.payload.id);
+      const inCart2 =  state.filter((item) => item.id !== action.payload.id);
+      if(inCart.length === 0){
+        return [...state, {id: action.payload.id, qty: action.payload.qty + 1}];
+      } else {
+          return [...inCart2, {id: action.payload.id, qty: inCart[0].qty += 1}];
+      }
     default:
       return state;
   };
