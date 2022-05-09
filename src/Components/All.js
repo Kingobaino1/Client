@@ -1,13 +1,18 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import Images from './Images';
-import { displayProduct, itemId, currentCategory } from '../actions/index';
+import { CategoryName } from './styles/Container.style';
+import {
+  displayProduct,
+  itemId,
+  currentCategory
+  } from '../actions/index';
 
 class All extends Component {
   constructor(props){
     super(props);
     this.goToProductPage = this.goToProductPage.bind(this);
-  }
+  };
 
   goToProductPage(id){
      this.props.productReducer(id);
@@ -19,10 +24,12 @@ class All extends Component {
     this.allCategory = this.props.all.data.categories;
     if(this.allCategory){
     return(
+      <div className='body'>
+      <CategoryName>{this.props.name}</CategoryName>
       <div className='imgs'>
+        
         {
           (this.allCategory.map((item) => {
-            
            return (item.name === this.props.new) ?
                item.products.map((product) => {
                   const label = product.prices;
@@ -41,6 +48,7 @@ class All extends Component {
           )
           ) 
        } 
+      </div>
       </div>
     )}
   };

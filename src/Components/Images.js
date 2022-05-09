@@ -17,7 +17,7 @@ class Images extends Component {
         <div>
           <Items src={this.props.src} name={this.props.name}
             symbol={this.props.symbol} amount={this.props.amount}
-            stock='This product is out of Stock right now'
+            stock='OUT OF STOCK'
           /> 
         </div>
       );

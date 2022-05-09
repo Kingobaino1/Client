@@ -6,15 +6,15 @@ class Items extends Component {
       <div>
           <div>
             <div style={{backgroundImage: `url(${this.props.src})`,
-                           backgroundSize: 'contain',
+                           backgroundSize: 'cover',
                            backgroundRepeat: 'no-repeat'}}
                   className='img imgs'>
-              <div className='stock'><h5>{this.props.stock}</h5></div>
+             <div className='out-stock font-style w'>{this.props.stock}</div> 
             </div>
-            <div>
+            <div className='name font-style'>
               {this.props.name}
             </div>
-            <div><span>{this.props.symbol}</span><span>{this.props.amount}</span></div>
+            <div className='currency font-style'><span>{this.props.symbol}</span><span>{this.props.amount}</span></div>
           </div>
       </div>  
     );

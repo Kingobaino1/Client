@@ -4,69 +4,77 @@ import ChangeImage from './ChangeImage';
 import categoryLogic from '../logic/categoryLogic';
 import * as CartStyles from './styles/Cart.style';
 import { AmountStyled } from './styles/Amount.style';
+import * as DropDownStyles from './styles/DropDown.style';
 
-class Cart extends Component {
+class DropDown extends Component {
   constructor(props){
     super(props);
-    this.selectColor = this.selectColor.bind(this);
     this.state = {
       total: 0,
     };
     this.total = 0;
     this.symbol = '';
   };
-
-  selectColor = (color) => (e) => {
-    console.log(color);
-    console.log(e)
-  }
  
   render () {
-    const { total, symbol, tax } = categoryLogic(this.props.cart, this.props.cartItems, this.props.currency);
+    const { total, symbol } = categoryLogic(
+                                this.props.cart,
+                                this.props.cartItems,
+                                this.props.currency
+                              );
     if(this.props.cart.length > 0) {
       return (
-        <CartStyles.CartContainer>
-        <CartStyles.CartTitle display={this.props.display}>
-          CART
-        </CartStyles.CartTitle>
+        <DropDownStyles.Cart>
+        <CartStyles.Hide 
+        >
+          {(this.props.qty > 1) ?
+            <CartStyles.SmlScreen>
+              <div>My Bag:</div> <div>{this.props.qty} items</div>
+            </CartStyles.SmlScreen>:
+            <CartStyles.SmlScreen>
+              <div>My Bag:</div> <div>{this.props.qty} item</div>
+            </CartStyles.SmlScreen>
+          }
+        </CartStyles.Hide>
+
         <div>
-          <div className='w'>           
+          <div>           
           {
             this.props.cart.map((item) => {
               const qt = this.props.quantity.filter((a) => a.id === item.id)
               const length = item.gallery.length;
               return (
-                <CartStyles.CartBody key={item.name}>
+                <DropDownStyles.DropDownItems key={item.name}>
                   <div className=''>
-                    <CartStyles.CartName>{item.name}</CartStyles.CartName>
+                    <DropDownStyles.ItemName>{item.name}</DropDownStyles.ItemName>
                     <div>
                     {item.prices.map(element => {
                        if(element.currency.label !== this.props.currency) return null
                          return (
-                            <AmountStyled key={element.amount}>
+                            <DropDownStyles.Amount key={element.amount}>
                               <div>{element.currency.symbol}</div>
                               <span>{element.amount}</span>
-                            </AmountStyled>
+                            </DropDownStyles.Amount>
                          )
                     })}
                     </div>
                     {item.attributes.map((attribute) =>{
                        return (<div key={attribute.name}>
-                         <CartStyles.AttributeName>{attribute.name}:</CartStyles.AttributeName>
+                         <DropDownStyles.ItemName>{attribute.name}:</DropDownStyles.ItemName>
                          <div key={attribute.name} className='d-flex'>
                          {attribute.items.map((att) => {
                            if(attribute.name === 'Color') {
                              return (
                                <div key={att.value}>
-                                  <CartStyles.ColorAttribute color={att.value} onClick={() => console.log('hello world')}>
+                                  <DropDownStyles.Color color={att.value} onClick={() => console.log('hello world')}>
 
-                                  </CartStyles.ColorAttribute>
+                                  </DropDownStyles.Color>
                                </div>
                              )
                            }
                            return (
                              <div key={att.value}>
-                               <CartStyles.OtherAttribute onClick={this.selectColor(att.value)}>{att.value}</CartStyles.OtherAttribute>
+                               <DropDownStyles.OtherAttribute Onclick={() => {}}>{att.value}</DropDownStyles.OtherAttribute>
                              </div>
                            )
                           
@@ -81,29 +89,30 @@ class Cart extends Component {
                     <div className='d-flex'>
                       <div className='d-flex'>
                         <ChangeImage id={qt[0].id} init={qt[0].qty}
-                                     length={length} num={length - 1} display='block'
-                                     count={qt[0].qty } width='200px' height='200px' />
+                                     length={length} num={length - 1} display='none'
+                                     count={qt[0].qty } width='121px' height='190px' />
                       </div>
                     </div>
-                </CartStyles.CartBody>
+                </DropDownStyles.DropDownItems>
               )
             })
           }
-          </div>
-          <CartStyles.CartFooter>                            
-            <AmountStyled>
-              Tax 21%: <div style={{paddingBottom: '2px'}}>{symbol}</div>
-              <span>{tax}</span>
-            </AmountStyled>
-            <div style={{paddingBottom: '2px'}}>Quantity: {this.props.qty}</div>
-            <AmountStyled style={{paddingTop: '2px'}}>
-              Total: <div>{symbol}</div>
-              <span>{total}</span>
+          <CartStyles.Total hideTotal={this.props.hideTotal}>
+            <div>
+              <div>Total</div>
+              <AmountStyled>
+                <div>{symbol}</div>
+                <span>{total}</span>
               </AmountStyled>
-              <CartStyles.Order onClick={() => {}}>ORDER</CartStyles.Order>
-          </CartStyles.CartFooter>
+            </div>
+          </CartStyles.Total >
+          </div>
+          <DropDownStyles.Checkout>
+              <DropDownStyles.ViewBag>VIEW BAG</DropDownStyles.ViewBag>
+              <DropDownStyles.Order >CHECK OUT</DropDownStyles.Order>
+          </DropDownStyles.Checkout>
         </div>
-        </CartStyles.CartContainer>
+        </DropDownStyles.Cart>
     )
     }
   return null
@@ -120,4 +129,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Cart);
+export default connect(mapStateToProps)(DropDown);

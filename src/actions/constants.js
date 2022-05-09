@@ -9,5 +9,6 @@
   export const COUNT = 'COUNT';
   export const CHANGE_CURRENCY = 'CHANGE_CURRENCY';
   export const CURRENT_CATEGORY = 'CURRENT_CATEGORY';
-  export const QTY_DOWN = 'QTY_DOWN';
-  export const QTY_UP = 'QTY_UP';
+  export const PRICE = 'PRICE';
+  export const DROPDOWN = 'DROPDOWN';
+

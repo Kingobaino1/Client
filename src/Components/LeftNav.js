@@ -1,6 +1,7 @@
 import { Component } from 'react';
-import { category, currentCategory } from '../actions/index';
+import { currentCategory } from '../actions/index';
 import { connect } from 'react-redux';
+import { SelectCategory } from './styles/Category.style';
 
 class LeftNav extends Component {
   constructor(props) {
@@ -18,11 +19,8 @@ class LeftNav extends Component {
     this.setState({
       selected: true,
       category: name,
-    })
-    // e.target.style.color = 'green';
-    // e.target.removeEventListener('onClick', this.selectCategory);
+    });
   };
-
 
   render(){
     if(this.props.data.categories){
@@ -31,10 +29,14 @@ class LeftNav extends Component {
           return (
             <div className='left' key={item.name}>
               <nav className='nav-ul'>
-                <div onClick={(e) => this.selectCategory(e, item.name)}>
-                       <div className={this.state.selected && (this.state.category === item.name) ? 'cat-color': 'default'}>{(item.name).toUpperCase()}</div>
-                       <div className={this.state.selected && (this.state.category === item.name) ? 'bk-color': 'default'}></div>
-                </div>
+                <SelectCategory onClick={(e) => this.selectCategory(e, item.name)} >
+                       <div className="font-style left-nav {this.state.selected && (this.state.category === item.name) ?
+                                       'cat-color': 'default'}">
+                         {(item.name).toUpperCase()}
+                      </div>
+                       <div className={this.state.selected && (this.state.category === item.name) ? 
+                                      'bk-color': 'default'}></div>
+                </SelectCategory>
               </nav>
             </div>
           );

@@ -8,6 +8,7 @@ import Product from './Product';
 import Cart from './Cart';
 import { itemId, displayProduct } from '../actions/index';
 import All from './All';
+import { Container } from './styles/Container.style';
 
 class App extends Component {
 
@@ -17,9 +18,9 @@ class App extends Component {
     this.set = this.props.cate.category
     if (this.cat && this.state1) {
       return (
-        <div>
-          <div className='nav'>
-            <LeftNav color='green' />
+        <Container>
+          <div className='nav d-flex w'>
+            <LeftNav />
             <MiddleNav />
             <RightNav />   
           </div>
@@ -29,12 +30,12 @@ class App extends Component {
             this.state1.map((item) => {
               if(item.name !== this.set) return null
               return(
-                <All new={this.set} key={item.name} />
+                <All new={this.set} key={item.name} name={item.name.toUpperCase()} />
               )
             }): 
-            <All new='all' />
+            <All new='all' name='ALL' />
           }
-        </div>
+        </Container>
       );
     };
     return (
@@ -51,7 +52,8 @@ const mapStateToProps = (state) => {
     cate:state.currentCategoryReducer.category,
     allProducts: state.allProductReducer,
     productPage: state.productReducer.data.data,
-    currency: state.currencyReducer.label
+    currency: state.currencyReducer.label,
+    dropDown: state.dropDownReducer.hover,
   };
 };
 

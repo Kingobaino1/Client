@@ -1,6 +1,11 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { quantity } from '../actions/index';
+import * as CartStyles from './styles/Cart.style';
+import {
+  quantity,
+  cartItems,
+  cart
+  } from '../actions/index';
 
 class ChangeImage extends Component {
   constructor(props) {
@@ -11,7 +16,6 @@ class ChangeImage extends Component {
     this.decrement = this.decrement.bind(this);
     this.state = {
       url: 0,
-      qty: this.props.init,
     };
   };
 
@@ -33,19 +37,23 @@ class ChangeImage extends Component {
 
   increment(itemsId, itemId){
      if(itemsId === itemId){
-      this.setState({
-        qty: this.state.qty + 1,
-      });
       this.props.quantity(1);
+      const item = this.props.cartReducer({
+        id: itemId,
+        qty: 1,
+      });
+      this.props.qty(item.payload);
      };
   };
 
   decrement(itemsId, itemId, num){
      if(itemsId === itemId && num > 1){
        this.props.quantity(-1);
-        this.setState({
-         qty: this.state.qty - 1
-       });
+        const item = this.props.cartReducer({
+        id: itemId,
+        qty: -1,
+      });
+      this.props.qty(item.payload);
      };
   };
 
@@ -53,30 +61,38 @@ class ChangeImage extends Component {
     return (
       <div className='d-flex'>
         {this.props.cartProducts.map((item) => {
-          if(item.id === this.props.id){
-          return <div className='flex'>
-          <div onClick={() => this.increment(item.id, this.props.id)} className='plus'><h1 className='p'>+</h1></div>
-          <div><h6 className=''>{this.state.qty}</h6></div>
-          <div onClick={() => this.decrement(item.id, this.props.id, this.state.qty)} className='plus'><h1 className='p'>-</h1></div>
-        </div>
-          }
+          if(item.id !== this.props.id) return null
+          return (
+            <div className='flex' key={item.id}>
+            <CartStyles.PlusMinus onClick={() => this.increment(item.id, this.props.id)}>
+              <CartStyles.PM>+</CartStyles.PM>
+            </CartStyles.PlusMinus>
+            <div>
+              <CartStyles.PM>{this.props.count}</CartStyles.PM>
+            </div>
+            <CartStyles.PlusMinus onClick={() => this.decrement(item.id, this.props.id, this.props.count)}>
+              <CartStyles.PM>-</CartStyles.PM>
+            </CartStyles.PlusMinus>
+            </div>
+          )
         })}
         <div> 
         {
           this.props.cartProducts.map((item) => {
-            if(item.id === this.props.id){
+            if(item.id !== this.props.id) return null
               return (
-                <div style={{backgroundImage: `url(${item.gallery[this.state.url]})`,
-                       backgroundPosition: 'center center'}} className='bg'>
-                  <div className=''>
+                <CartStyles.ImageStyle width={this.props.width} height={this.props.height} key={item.id} url={`url(${item.gallery[this.state.url]})`}>
+                  <CartStyles.ChangeCartImage display={this.props.display}>
+                    <CartStyles.NextPrevImageIcon>
                      <i className="fa-solid fa-angle-left" 
                         onClick={() => this.prevImg(this.state.url)}></i>
                      <i className="fa-solid fa-angle-right"
                         onClick={() => this.nextImg(this.state.url, this.props.num)}></i>
-                  </div>
-                </div> 
+                    </CartStyles.NextPrevImageIcon>
+                  </CartStyles.ChangeCartImage>
+                </CartStyles.ImageStyle> 
               )
-            }
+            // }
           })
         }
         </div>
@@ -95,6 +111,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     quantity: count => dispatch(quantity(count)),
+    qty: items => dispatch(cartItems(items)),
+    cartReducer: item => dispatch(cart(item)),
   };
 };
 

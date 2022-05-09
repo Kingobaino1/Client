@@ -77,18 +77,15 @@ const currentCategory = (category) => ({
   payload: category,
 });
 
-const adjustQtyUp = (id, value) => ({
-  type: actionTypes.QTY_UP,
-  payload: {
-    id: id, 
-    qty: value,
-  }
+const price = (item) => ({
+  type: actionTypes.PRICE,
+  payload: item
 });
 
-const adjustQtyDown = (num) => ({
-  type: actionTypes.QTY_DOWN,
-  payload: num,
-});
+const dropDown = (hover) => ({
+  type: actionTypes.DROPDOWN,
+  payload: hover,
+})
 
 export{
   category,
@@ -102,6 +99,6 @@ export{
   quantity,
   changeCurrency,
   currentCategory,
-  adjustQtyDown,
-  adjustQtyUp,
+  price,
+  dropDown,
 };
