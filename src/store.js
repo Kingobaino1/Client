@@ -13,6 +13,7 @@ import quantityReducer from './reducers/quantity';
 import currentCategoryReducer from './reducers/currentCategory';
 import priceReducer from './reducers/price';
 import dropDownReducer from './reducers/dropDown';
+import attributeReducer from './reducers/attribute';
 
 const middleWares = [thunk, logger]
 const reducers = combineReducers({
@@ -28,6 +29,7 @@ const reducers = combineReducers({
   currentCategoryReducer,
   priceReducer,
   dropDownReducer,
+  attributeReducer,
 });
 
 const store = createStore(reducers, applyMiddleware(...middleWares));

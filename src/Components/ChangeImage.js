@@ -35,8 +35,9 @@ class ChangeImage extends Component {
     };
   };
 
-  increment(itemsId, itemId){
-     if(itemsId === itemId){
+  increment(e, itemsId, itemId){
+    e.preventDefault();
+    if(itemsId === itemId){
       this.props.quantity(1);
       const item = this.props.cartReducer({
         id: itemId,
@@ -64,7 +65,7 @@ class ChangeImage extends Component {
           if(item.id !== this.props.id) return null
           return (
             <div className='flex' key={item.id}>
-            <CartStyles.PlusMinus onClick={() => this.increment(item.id, this.props.id)}>
+            <CartStyles.PlusMinus onClick={(e) => this.increment(e, item.id, this.props.id)}>
               <CartStyles.PM>+</CartStyles.PM>
             </CartStyles.PlusMinus>
             <div>
@@ -92,7 +93,6 @@ class ChangeImage extends Component {
                   </CartStyles.ChangeCartImage>
                 </CartStyles.ImageStyle> 
               )
-            // }
           })
         }
         </div>

@@ -85,11 +85,17 @@ const price = (item) => ({
 const dropDown = (hover) => ({
   type: actionTypes.DROPDOWN,
   payload: hover,
-})
+});
+
+const attribute = (item) => ({
+  type: actionTypes.ATTRIBUTE,
+  payload: item,
+});
 
 export{
   category,
   allProduct,
+  attribute,
   currency,
   displayProduct,
   cart,

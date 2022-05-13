@@ -39,14 +39,16 @@ export const Color = styled.button`
   width: 16px;
   height: 16px;
   margin-top: 2px;
+  border: ${(props) => props.border}
 `;
 
 export const OtherAttribute = styled.button`
   width: 45px;
   height: 24px;
-  background: #FFFFFF;
+  background: ${(props) => props.bg};
   border: 1px solid #1D1F22;
-  margin: 3px 2px 0 0
+  margin: 3px 2px 0 0;
+  color: ${(props) => props.color};
 `;
 
 export const ItemName = styled.div`
@@ -79,4 +81,8 @@ export const Order = styled.div`
   text-align: center;
   background-color: #5ECE7B;
   color: white;
+`;
+
+export const Body = styled.div`
+  margin: 2px 10px;
 `;

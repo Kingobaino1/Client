@@ -8,6 +8,7 @@ import {
   cartItems,
   quantity,
   price,
+  attribute,
   } from '../actions/index';
 
 class Product extends Component {
@@ -16,13 +17,11 @@ class Product extends Component {
     this.addToCart = this.addToCart.bind(this);
     this.changeImage = this.changeImage.bind(this);
     this.selectValue = this.selectValue.bind(this);
+    this.attr = {}
     this.state = {
         id: this.props.itemId.id,
         qty: 0,
         img: 0,
-        selected: false,
-        value: '',
-        name: '',
     };
   };
 
@@ -39,6 +38,7 @@ class Product extends Component {
       qty: this.state.qty,
       amount: amount
     });
+    this.props.attributeData(this.attr);
   };
 
   changeImage(index){
@@ -47,19 +47,15 @@ class Product extends Component {
     });
   };
 
-  selectValue(na,name, value) {
-      // this.state[name] = value;
-      // this.setState({
-      //   value: value,
-      //   name: name,
-      // })
-      // if(na.name !== name && na.value !== value)
-      // this.setState({
-      //   selected: true,
-      //   value: value,
-      //   name: name,
-      // })
-  }
+  
+
+  selectValue(name, index, val) {
+    this.attr[name] = val;
+    this.attr['id'] = this.state.id;
+    this.setState({
+      activeIndex: index,
+    })
+  };
 
   render(){
     if(!(this.props.productReducer == null)){
@@ -89,20 +85,24 @@ class Product extends Component {
                   return  <div className='color-di' key={attribute.name}>
                     <div className='size' key={attribute.name}>{attribute.name}:</div>
                     <div className='d-flex' key={index}>
-                      {attribute.items.map((att) => {
+                      {attribute.items.map((att, index) => {
                         if(attribute.name === 'Color') {
                           return(
                             <div className='d-flex j-content' key={att.value}>
                                 <button className='color'
-                                         onClick={() => this.selectValue(this.state, attribute.name, att.value)}
-                                         key={att.value} style={(this.state.selected) ?
+                                         onClick={(e) => this.selectValue(attribute.name, index, att.value)}
+                                         key={att.value} style={(Object.values(this.attr).includes(att.value ||
+                                                                 Object.keys(this.attr).includes(attribute.name)))?
                                                                {border: '3px dotted #52D67A', backgroundColor: att.value}:
                                                                {backgroundColor: att.value}}>
                                 </button>
                             </div>
                           )
                         }
-                        return <div style={{border: '1px solid #1D1F22'}} onClick={() => this.selectValue(this.state, attribute.name, att.value)} key={att.value} className={(this.state.value === att.value)? 'attribute-design color': 'border color'}>{att.value}</div>
+                        return <div style={{border: '1px solid #1D1F22'}} onClick={(e) => this.selectValue(attribute.name, index, att.value)}
+                                    key={att.value} className={(Object.values(this.attr).includes(att.value ||
+                                                                Object.keys(this.attr).includes(attribute.name))) ?
+                                                               'attribute-design color': 'border color'}>{att.value}</div>
                       })
                       }
                     </div>
@@ -119,7 +119,6 @@ class Product extends Component {
                                 <div>{price.currency.symbol}</div>
                                 <span>{price.amount}</span>
                               </AmountStyled>)
-
                   })}
               </div>
             </div>
@@ -155,6 +154,7 @@ const mapDispatchToProps = (dispatch) => {
     qty: items => dispatch(cartItems(items)),
     quantity: count => dispatch(quantity(count)),
     itemPrice: pr => dispatch(price(pr)),
+    attributeData: attr => dispatch(attribute(attr)),
   };
 };
 

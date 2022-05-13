@@ -1,5 +1,3 @@
-import { adjustQtyDown } from "../actions";
-
 const initialState = []
 
 const priceReducer = (state = initialState, action) => {

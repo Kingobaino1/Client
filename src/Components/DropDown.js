@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import ChangeImage from './ChangeImage';
-import categoryLogic from '../logic/categoryLogic';
+import categoryLogic from '../logic/currencyLogic';
+import attributeLogic from '../logic/attributeLogic';
 import * as CartStyles from './styles/Cart.style';
 import { AmountStyled } from './styles/Amount.style';
 import * as DropDownStyles from './styles/DropDown.style';
@@ -37,12 +38,16 @@ class DropDown extends Component {
           }
         </CartStyles.Hide>
 
-        <div>
+        <DropDownStyles.Body>
           <div>           
           {
             this.props.cart.map((item) => {
               const qt = this.props.quantity.filter((a) => a.id === item.id)
               const length = item.gallery.length;
+              this.attrArray = attributeLogic(this.props.attribute);
+              this.attributeArray = this.attrArray.array;
+              console.log(this.attributeArray)
+              console.log(this.attrArray)
               return (
                 <DropDownStyles.DropDownItems key={item.name}>
                   <div className=''>
@@ -62,11 +67,12 @@ class DropDown extends Component {
                        return (<div key={attribute.name}>
                          <DropDownStyles.ItemName>{attribute.name}:</DropDownStyles.ItemName>
                          <div key={attribute.name} className='d-flex'>
-                         {attribute.items.map((att) => {
+                         {attribute.items.map((att, index) => {
                            if(attribute.name === 'Color') {
                              return (
                                <div key={att.value}>
-                                  <DropDownStyles.Color color={att.value} onClick={() => console.log('hello world')}>
+                                  <DropDownStyles.Color border={(this.attributeArray.includes(att.value) || this.state.indexActive === index) ? '3px dotted #52D67A': ''}
+                                                        color={att.value} onClick={(e) => this.selectValue(e, index)}>
 
                                   </DropDownStyles.Color>
                                </div>
@@ -74,7 +80,10 @@ class DropDown extends Component {
                            }
                            return (
                              <div key={att.value}>
-                               <DropDownStyles.OtherAttribute Onclick={() => {}}>{att.value}</DropDownStyles.OtherAttribute>
+                               <DropDownStyles.OtherAttribute bg={(this.attributeArray.includes(att.value) || this.state.indexActive === index) ? '#1D1F22': ''}
+                                                              color={(this.attributeArray.includes(att.value) || this.state.indexActive === index) ? 'white': ''}
+                                                              Onclick={() => {}}>{att.value}
+                               </DropDownStyles.OtherAttribute>
                              </div>
                            )
                           
@@ -90,7 +99,7 @@ class DropDown extends Component {
                       <div className='d-flex'>
                         <ChangeImage id={qt[0].id} init={qt[0].qty}
                                      length={length} num={length - 1} display='none'
-                                     count={qt[0].qty } width='121px' height='190px' />
+                                     count={qt[0].qty } width='90px' height='100px' />
                       </div>
                     </div>
                 </DropDownStyles.DropDownItems>
@@ -111,7 +120,7 @@ class DropDown extends Component {
               <DropDownStyles.ViewBag>VIEW BAG</DropDownStyles.ViewBag>
               <DropDownStyles.Order >CHECK OUT</DropDownStyles.Order>
           </DropDownStyles.Checkout>
-        </div>
+        </DropDownStyles.Body>
         </DropDownStyles.Cart>
     )
     }
@@ -126,6 +135,7 @@ const mapStateToProps = (state) => {
     qty: state.quantityReducer,
     quantity: state.cartItemsReducer,
     currency: state.currencyReducer.label,
+    attribute: state.attributeReducer,
   };
 };
 

@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import DropDown from './DropDown';
-import { HiddenCart } from './styles/Cart.style';
+import { HiddenCart, Count } from './styles/Cart.style';
 import {
   changeCurrency,
   currentCategory,
@@ -83,7 +83,7 @@ class RightNav extends Component {
               </HiddenCart>
           </ul>
           {this.props.quantity > 0 ?
-            <div className='count'>{this.props.quantity}</div> : null
+            <Count>{this.props.quantity}</Count> : null
           }
         </div>
       );

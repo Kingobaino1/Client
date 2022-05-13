@@ -11,4 +11,4 @@
   export const CURRENT_CATEGORY = 'CURRENT_CATEGORY';
   export const PRICE = 'PRICE';
   export const DROPDOWN = 'DROPDOWN';
-
+  export const ATTRIBUTE = 'ATTRIBUTE';

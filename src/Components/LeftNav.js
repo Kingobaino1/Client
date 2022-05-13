@@ -30,8 +30,8 @@ class LeftNav extends Component {
             <div className='left' key={item.name}>
               <nav className='nav-ul'>
                 <SelectCategory onClick={(e) => this.selectCategory(e, item.name)} >
-                       <div className="font-style left-nav {this.state.selected && (this.state.category === item.name) ?
-                                       'cat-color': 'default'}">
+                       <div className={this.state.selected && (this.state.category === item.name) ?
+                                       'cat-color': 'default'}>
                          {(item.name).toUpperCase()}
                       </div>
                        <div className={this.state.selected && (this.state.category === item.name) ? 

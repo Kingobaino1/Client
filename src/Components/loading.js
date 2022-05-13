@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import { LoadingComponent } from './styles/Loading.style' 
 import{
   category,
   allProduct,
@@ -10,7 +11,7 @@ class Loading extends Component {
 
   render() {
     return(
-      <div className='load'><h1 className="loading">Loading...</h1></div>
+      <div className='load'><LoadingComponent>Loading...</LoadingComponent></div>
     );
   };
 };

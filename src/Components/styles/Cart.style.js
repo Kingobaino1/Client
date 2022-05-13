@@ -23,12 +23,14 @@ export const ColorAttribute = styled.button`
   width: 32px;
   height: 32px;
   margin-top: 2px;
+  border: ${(props) => props.border}
 `;
 
 export const OtherAttribute = styled.button`
   width: 63px;
   height: 45px;
-  background: #FFFFFF;
+  background: ${(props) => props.bg};
+  color:${(props) => props.color};
   border: 1px solid #1D1F22;
   margin: 3px 4px 0 0
 `;
@@ -73,7 +75,7 @@ export const CartTitle = styled.div`
 
 export const SmlScreen = styled.div`
   display: flex;
-  margin-bottom: 10px;
+  margin: 5px 10px;
   div {
     font-weight: bold;
   }
@@ -97,9 +99,9 @@ export const HiddenCart = styled.div`
   display: ${(props) => props.display};
   width: 335px;
   position: absolute;
-  right: 71px;
-  padding-top: 88px;
-  height: 677px;
+  right: 80px;
+  top: 90px;
+  // height: 677px;
 `;
 
 export const CartBody = styled.div`
@@ -131,5 +133,19 @@ export const ChangeCartImage = styled.div`
 export const NextPrevImageIcon = styled.div`
   ${SharedStyle.Display};
   width: 100%;
+`;
+
+export const Count = styled.div`
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  position: relative;
+  left: -10px;
+  top: 9px;
+  font-size: small;
+  font-weight: bold;
 `;
 

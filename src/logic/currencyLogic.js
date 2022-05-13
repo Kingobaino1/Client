@@ -1,4 +1,4 @@
-const categoryLogic = (products, product, currency) => {
+const currencyLogic = (products, product, currency) => {
   let total = 0;
   let symbol = '';
   products.map((item) => {
@@ -23,4 +23,4 @@ const tax = Math.round(0.21 * total * 100) / 100 ;
  };
 };
 
-export default categoryLogic;
+export default currencyLogic;

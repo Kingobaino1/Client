@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import Loading from './loading';
 import Product from './Product';
 import Cart from './Cart';
-import { itemId, displayProduct } from '../actions/index';
 import All from './All';
 import { Container } from './styles/Container.style';
 
@@ -57,11 +56,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-  productReducer: id => dispatch(displayProduct(id)),
-  currentItemId: id => dispatch(itemId(id)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
